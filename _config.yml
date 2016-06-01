@@ -1,0 +1,55 @@
+# Site settings
+title:       ouThere
+email:
+author:      Yan Foto
+description: "I know what's happening out there!"
+baseurl:     ""
+url:         "http://outhere.quaintous.com"
+
+# Google analytics
+google_analytics: UA-19069240-7
+
+# Optional features
+animated:           false
+show_related_posts: false
+show_post_footers:  false
+
+# Disqus post comments
+# (leave blank to disable Disqus)
+disqus_shortname: quaintous-outhere
+
+# Social icons
+show_social_icons: true
+github_username: yan-foto
+stackoverflow_id: 2295964
+twitter_username: "@quaintous"
+google_plus_id:
+linkedin_username:
+angellist_username:
+bitcoin_url:
+paypal_url:
+flattr_button:
+
+# Post sharing icons
+show_sharing_icons: true
+share_text: 'Share this post!'
+# Change to 'true' to enable individual icons
+share_facebook: true
+share_twitter: true
+share_googleplus: true
+share_linkedin: false
+share_digg: false
+share_tumblr: false
+share_reddit: false
+share_stumbleupon: false
+share_hackernews: false
+
+# Build settings
+markdown:     kramdown
+redcarpet:
+  extensions: ['smart', 'tables', 'with_toc_data']
+permalink:    /:year/:month/:day/:title/
+paginate:     3
+sass:
+  compressed: true
+gems: [jekyll-paginate]

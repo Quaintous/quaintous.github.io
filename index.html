@@ -1,0 +1,36 @@
+---
+layout: default
+---
+<img src="{{ site.baseurl }}/assets/logo.png">
+<img id="background-img" src="{{ site.baseurl }}/assets/bg.jpg" class="visuallyhidden">
+<div class="posts">
+  {% for post in paginator.posts %}
+    <div class="post mdl-card mdl-shadow--2dp mdl-cell mdl-cell--6-col">
+      <div class="mdl-card__title">
+        <a href="{{ post.url | prepend: site.baseurl }}">
+          <h3 class="mdl-card__title-text">{{ post.title }}</h3>
+        </a>
+      </div>
+      <div class="mdl-card__supporting-text">
+        {% if post.summary %}
+          {{ post.summary }}
+        {% else %}
+          {{ post.excerpt }}
+        {% endif %}
+      </div>
+      <div class="post-info mdl-card__actions mdl-card--border mdl-color-text--primary">
+        <div class="post-time">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          {{ post.date | date: "%b %-d, %Y" }}
+        </div>
+        <div class="post-tags">
+          <i class="fa fa-tags" aria-hidden="true"></i>
+          {{ post.categories | join: ', ' }}
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+  <div class="mdl-cell mdl-cell--6-col">
+    {% include pagination.html %}
+  </div>
+</div>

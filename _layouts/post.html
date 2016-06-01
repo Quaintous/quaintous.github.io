@@ -1,0 +1,102 @@
+---
+layout: default
+---
+<div class="post mdl-cell mdl-cell--12-col mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800">
+  <div itemscope itemtype="http://schema.org/BlogPosting" itemprop="mainEntity">
+    {% assign minutes = content | number_of_words | divided_by: 180 %}
+    {% if minutes == 0 %}
+    {% assign minutes = 1 %}
+    {% endif %}
+    <meta itemprop="headline" content="{{ page.summary }}">
+    <meta itemprop="mainEntityOfPage" itemscope itemtype="http://schema.org/WebPage" href="{{ site.url }}{{ page.url }}" itemid="{{ site.url }}{{ page.url }}">
+
+    {% if page.image %}
+      {% assign image = page.image %}
+    {% else %}
+      {% capture image %}{{ site.url }}/assets/logo.png{% endcapture %}
+    {% endif %}
+    <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+      <meta itemprop="url" content="{{ image }}">
+      <meta itemprop="width" content="300">
+      <meta itemprop="height" content="300">
+    </div>
+
+    <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+      <meta itemprop="name" content="Quaintous">
+      <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+        <meta itemprop="url" content="{{ image }}">
+        <meta itemprop="width" content="300">
+        <meta itemprop="height" content="300">
+      </div>
+    </div>
+
+    <h1 itemprop="name">{{ page.title }}</h1>
+    <span class="mdl-color-text--primary">
+      <div class="post-meta" itemprop="datePublished" content="{{ page.date | date: "%Y-%m-%d" }}">
+        <i class="fa fa-calendar" aria-hidden="true"></i>
+        {{ page.date | date: "%b %-d, %Y" }}
+      </div>
+      <div class="keyword">
+        <i class="fa fa-tags" aria-hidden="true"></i>
+        {{ page.categories | join: ', ' }}
+      </div>
+      <div class="minutes">
+        <i class="fa fa-clock-o" aria-hidden="true"></i>
+        {{ minutes }} minute read
+      </div>
+
+      {% if page.update_date %}
+        {% assign updated = page.update_date %}
+      {% else %}
+        {% assign updated = page.date %}
+      {% endif %}
+      <span class="post-meta" itemprop="dateModified" content="{{ updated | date: "%Y-%m-%d" }}">
+        {% if page.update_date %}Updated: {{ page.update_date | date: "%b %-d, %Y" }}{% endif %}
+      </span>
+      <br>
+      <meta itemprop="description" content="{{ page.summary }}">
+      <div itemprop="author" itemtype="http://schema.org/Person">
+        <span class="post-meta small">{{ site.author }}</span>
+      </div>
+    </span>
+
+    <article class="post-content">
+      {{ content }}
+    </article>
+
+    {% if site.show_sharing_icons %}
+      {% include share_buttons.html %}
+    {% endif %}
+
+    {% if site.show_post_footers %}
+      {% include post_footer.html %}
+    {% endif %}
+
+    {% if site.disqus_shortname %}
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname  = '{{ site.disqus_shortname }}';
+        var disqus_identifier = '{{ page.id }}';
+
+        (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    {% endif %}
+
+    {% if site.show_related_posts %}
+      <h3 class="related-post-title">Related Posts</h3>
+      {% for post in site.related_posts %}
+        <div class="post ml2">
+          <a href="{{ post.url | prepend: site.baseurl }}" class="post-link">
+            <h4 class="post-title">{{ post.title }}</h4>
+            <p class="post-summary">{{ post.summary }}</p>
+          </a>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+</div>
